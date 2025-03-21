@@ -1,18 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
-import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse.js';
 
 @Injectable()
 export class McpService {
   private readonly client: Client;
-  private readonly transport: StdioClientTransport;
+  private readonly transport: SSEClientTransport;
 
   constructor() {
-    this.transport = new StdioClientTransport({
-      command: 'node',
-      args: ['dist/main.js'],
-      cwd: 'C:/Users/irfan/Desktop/EdgeFirm/mcp/mcp-app',
-    });
+    // this.transport = new StdioClientTransport({
+    //   command: 'node',
+    //   args: ['dist/main.js'],
+    //   cwd: 'C:/Users/irfan/Desktop/EdgeFirm/mcp/mcp-app',
+    // });
+    this.transport = new SSEClientTransport(
+      new URL('http://localhost:3001/mcp/sse'),
+    );
     this.client = new Client(
       {
         name: 'example-client',
@@ -34,8 +37,8 @@ export class McpService {
     this.listTools();
     this.callTool('scan_nmap', {
       target: 'localhost',
-      scanType: 'quick',
       timing: 3,
+      ports: '3001',
     });
   }
 
@@ -54,9 +57,5 @@ export class McpService {
       console.error(`❌ Error executing tool: ${name}`, error);
       throw error;
     }
-  }
-
-  getClient(): Client {
-    return this.client;
   }
 }

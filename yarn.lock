@@ -872,7 +872,7 @@
     raw-body "^3.0.0"
     zod "^3.23.8"
 
-"@modelcontextprotocol/sdk@^1.7.0":
+"@modelcontextprotocol/sdk@^1.6.1":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@modelcontextprotocol/sdk/-/sdk-1.7.0.tgz#77da3978e2ecedba6d306c0f2178a7d5189c9224"
   integrity sha512-IYPe/FLpvF3IZrd/f5p5ffmWhMc3aEMuM2wGJASDqC2Ge7qatVCdbfPx3n/5xFeb19xN0j/911M2AaFuircsWA==
